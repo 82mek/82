@@ -22,7 +22,8 @@
 						<li><a href="#one" class="button icon solid fa-chevron-down scrolly">Learn More</a></li>
 					</ul>
 				</div>
-				<div class="image phone"><div class="inner"><img src="images/infinity22.jpg" alt="" /></div></div>
+				<div class="image phone"><div class="inner"><img id="image" src="images/infinity22.jpg" alt="" /></div></div>
+				
 			</header>
 
 		<!-- One -->
@@ -42,21 +43,24 @@
 			<section id="two" class="wrapper">
 				<div class="inner alt">
 					<section class="spotlight">
-						<div class="image"><img src="images/pic01.jpg" alt="" /></div>
+						<div class="image"><img id="image" src="images/pic01.jpg" alt="" /></div>
+						
+
 						<div class="content">
 							<h3>Magna sed ultrices</h3>
 							<p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
 						</div>
 					</section>
 					<section class="spotlight">
-						<div class="image"><img src="images/pic02.jpg" alt="" /></div>
+						<div class="image"><img id="image" src="images/pic02.jpg" alt="" /></div>
+						
 						<div class="content">
 							<h3>Ultrices nullam aliquam</h3>
 							<p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
 						</div>
 					</section>
 					<section class="spotlight">
-						<div class="image"><img src="images/pic03.jpg" alt="" /></div>
+						<div class="image"><img id="image" src="images/pic03.jpg" alt="" /></div>
 						<div class="content">
 							<h3>Aliquam sed magna</h3>
 							<p>Morbi mattis ornare ornare. Duis quam turpis, gravida at leo elementum elit fusce accumsan dui libero, quis vehicula lectus ultricies eu. In convallis amet leo non sapien iaculis efficitur consequat lorem ipsum.</p>
@@ -424,21 +428,15 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			<script>
-  const imageList = [
-    'images/infinity22.jpg',
-    'images/girl1.jpg',
-    'images/pic02.jpg',
-    'images/pic03.jpg'
-  ];
-
-  let currentImage = 0;
-  const imgElement = document.getElementById('phone-slider');
-
-  setInterval(() => {
-    currentImage = (currentImage + 1) % imageList.length;
-    imgElement.src = imageList[currentImage];
-  }, 3000); // changes every 3 seconds
+<script>
+  window.onload = function () {
+    setTimeout(() => {
+      const img = document.getElementById('phone-slider');
+      if (img) {
+        img.src = 'images/girl1.jpg';
+      }
+    }, 5000); // 5 seconds
+  };
 </script>
-
 	</body>
 </html>
