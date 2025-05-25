@@ -423,6 +423,22 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script>
+  const imageList = [
+    'images/infinity22.jpg',
+    'images/pic01.jpg',
+    'images/pic02.jpg',
+    'images/pic03.jpg'
+  ];
+
+  let currentImage = 0;
+  const imgElement = document.getElementById('phone-slider');
+
+  setInterval(() => {
+    currentImage = (currentImage + 1) % imageList.length;
+    imgElement.src = imageList[currentImage];
+  }, 3000); // changes every 3 seconds
+</script>
 
 	</body>
 </html>
