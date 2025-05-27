@@ -9,6 +9,17 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+  #phone-slider {
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+  }
+
+  #phone-slider.fade-out {
+    opacity: 0;
+  }
+</style>
+
 	</head>
 	<body class="is-preload">
 
@@ -434,22 +445,6 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
   window.onload = function () {
     const img = document.getElementById('phone-slider');
 
-    // Show girl1.jpg immediately
-    if (img) {
-      img.src = 'images/girl1.jpg';
-
-      // After 5 seconds, show bushwalk.jpg
-      setTimeout(() => {
-        img.src = 'images/bushwalk.jpg';
-      }, 5000);
-    }
-  };
-</script>
-<script>
-  window.onload = function () {
-    const img = document.getElementById('phone-slider');
-
-    // List of images to rotate through
     const images = [
       'images/girl1.jpg',
       'images/bushwalk.jpg',
@@ -462,26 +457,24 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
     function rotateImage() {
       if (img) {
-        img.src = images[index];
-        index = (index + 1) % images.length;
+        // Fade out
+        img.classList.add('fade-out');
+
+        // Wait for fade-out to finish, then change image
+        setTimeout(() => {
+          img.src = images[index];
+          index = (index + 1) % images.length;
+
+          // Fade back in
+          img.classList.remove('fade-out');
+        }, 1000); // Match the CSS transition duration (1 second)
       }
     }
 
-    // Start the slider
-    rotateImage(); // Show the first image immediately
-    setInterval(rotateImage, 5000); // Rotate every 5 seconds
+    rotateImage(); // Show first image
+    setInterval(rotateImage, 3000); // Rotate every 3 seconds
   };
 </script>
-<style>
-  #phone-slider {
-    transition: opacity 1s ease-in-out;
-    opacity: 1;
-  }
-
-  #phone-slider.fade-out {
-    opacity: 0;
-  }
-</style>
 
 
 	</body>
