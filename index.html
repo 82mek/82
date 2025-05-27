@@ -25,6 +25,7 @@
   <div class="image phone">
     <div class="inner">
       <img id="phone-slider" src="images/infinity22.jpg" alt="" />
+	    
     </div>
   </div>
 </header>
@@ -442,6 +443,33 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
         img.src = 'images/bushwalk.jpg';
       }, 5000);
     }
+  };
+</script>
+<script>
+  window.onload = function () {
+    const img = document.getElementById('phone-slider');
+
+    // List of images to rotate through
+    const images = [
+      'images/girl1.jpg',
+      'images/bushwalk.jpg',
+      'images/infinity22.jpg',
+      'images/pic01.jpg',
+      'images/pic02.jpg'
+    ];
+
+    let index = 0;
+
+    function rotateImage() {
+      if (img) {
+        img.src = images[index];
+        index = (index + 1) % images.length;
+      }
+    }
+
+    // Start the slider
+    rotateImage(); // Show the first image immediately
+    setInterval(rotateImage, 5000); // Rotate every 5 seconds
   };
 </script>
 
