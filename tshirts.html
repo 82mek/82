@@ -142,6 +142,31 @@
   @media (max-width: 460px){ .products{grid-template-columns:1fr} }
 </style>
 </head>
+  <div class="modal" id="qvModal" aria-hidden="true" role="dialog" aria-label="Quick view">
+  <div class="box">
+    <div class="top">
+      <strong id="qvTitle">Quick view</strong>
+      <button class="close" id="qvClose" type="button">✕</button>
+    </div>
+    <div class="inner">
+      <div class="mimg"><img id="qvImage" src="" alt=""></div>
+      <div class="panel">
+        <div style="color:var(--muted); font-size:13px; margin-bottom:6px">Regular Fit — 180 GSM</div>
+        <div style="font-size:18px; font-weight:700" id="qvPrice"></div>
+
+        <div class="thumbs" id="qvThumbs"></div>
+
+        <div class="actions">
+          <a class="btn" id="qvView" href="#">View product page</a>
+          <button class="btn secondary" id="qvAdd" type="button">Add to cart (demo)</button>
+        </div>
+
+        <p id="qvStatus" style="color:var(--muted); font-size:13px; margin-top:10px"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <body>
 
 <header>
