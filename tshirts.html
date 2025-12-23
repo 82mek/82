@@ -35,6 +35,95 @@
   .chip{border:1px solid var(--line); border-radius:999px; padding:8px 12px; font-size:13px; background:#fff; cursor:pointer}
   .chip[aria-pressed="true"]{border-color:#111}
 
+  .card{position:relative}
+.card .img{aspect-ratio:1/1; background:#eee center/cover no-repeat; display:block}
+
+/* Quick View button */
+.qv{
+  position:absolute;
+  left:12px;
+  right:12px;
+  bottom:64px;
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:rgba(255,255,255,.92);
+  font-weight:600;
+  cursor:pointer;
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity .18s ease, transform .18s ease;
+}
+.card:hover .qv{opacity:1; transform:translateY(0)}
+@media (max-width:760px){
+  .qv{opacity:1; transform:none} /* always visible on mobile */
+}
+
+/* Modal */
+.modal{
+  position:fixed; inset:0;
+  background:rgba(0,0,0,.55);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  z-index:999;
+}
+.modal[aria-hidden="false"]{display:flex}
+.modal .box{
+  width:min(920px, 100%);
+  background:#fff;
+  border-radius:var(--radius);
+  overflow:hidden;
+  border:1px solid var(--line);
+}
+.modal .inner{
+  display:grid;
+  grid-template-columns: 1.1fr .9fr;
+}
+@media (max-width:900px){
+  .modal .inner{grid-template-columns:1fr}
+}
+.modal .mimg{
+  aspect-ratio:1/1;
+  background:var(--soft);
+}
+.modal .mimg img{width:100%; height:100%; object-fit:cover; display:block}
+.modal .panel{padding:16px}
+.modal .top{
+  display:flex; justify-content:space-between; align-items:center; gap:10px;
+  border-bottom:1px solid var(--line);
+  padding:12px 16px;
+}
+.modal .close{
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:999px;
+  padding:8px 10px;
+  cursor:pointer;
+}
+.modal .thumbs{display:flex; gap:8px; margin-top:10px}
+.modal .thumb{
+  width:64px; height:64px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  overflow:hidden;
+  background:var(--soft);
+  cursor:pointer;
+}
+.modal .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+.modal .actions{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+.modal .btn{
+  display:inline-block;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid #111;
+  background:#111;
+  color:#fff;
+  font-weight:600;
+}
+.modal .btn.secondary{background:#fff; color:#111; border-color:var(--line)}
+
   .products{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; padding:10px 0 40px}
   .card{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:#fff}
   .card .img{aspect-ratio: 1/1; background:#eee center/cover no-repeat; display:block}
