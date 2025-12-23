@@ -209,141 +209,7 @@
     <div class="wrap copyright">© <span id="y"></span> YourBrand</div>
   </footer>
 
-<script>
-  document.getElementById('y').textContent = new Date().getFullYear();
 
-  // ---- Search + filter (your existing logic) ----
-  const q = document.getElementById('q');
-  const cards = Array.from(document.querySelectorAll('.card'));
-  const chips = Array.from(document.querySelectorAll('.chip'));
-  let activeFilter = 'all';
-
-  function apply() {
-    const term = (q.value || '').trim().toLowerCase();
-    cards.forEach(card => {
-      const text = card.innerText.toLowerCase();
-      const tags = (card.dataset.tags || '').toLowerCase();
-      const matchesSearch = !term || text.includes(term) || tags.includes(term);
-      const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
-      card.style.display = (matchesSearch && matchesFilter) ? '' : 'none';
-    });
-  }
-  q.addEventListener('input', apply);
-
-  chips.forEach(chip => {
-    chip.addEventListener('click', () => {
-      chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
-      chip.setAttribute('aria-pressed', 'true');
-      activeFilter = chip.dataset.filter;
-      apply();
-    });
-  });
-  const allChip = chips.find(c => c.dataset.filter === 'all');
-  if (allChip) allChip.click();
-
-  // ---- Hover swap front/back (if back exists) ----
-  function setBg(el, url){ el.style.backgroundImage = `url('${url}')`; }
-
-  cards.forEach(card => {
-    const imgLink = card.querySelector('.img');
-    const front = card.dataset.front;
-    const back = card.dataset.back;
-
-    if (!imgLink || !front) return;
-
-    // Desktop hover
-    card.addEventListener('mouseenter', () => { if (back) setBg(imgLink, back); });
-    card.addEventListener('mouseleave', () => { setBg(imgLink, front); });
-
-    // Mobile "tap to flip" (optional)
-    let flipped = false;
-    imgLink.addEventListener('click', (e) => {
-      if (!back) return; // no back image
-      // If you want click to still go to product page, comment out the next 4 lines:
-      e.preventDefault();
-      flipped = !flipped;
-      setBg(imgLink, flipped ? back : front);
-      setTimeout(()=>{ flipped=false; setBg(imgLink, front); }, 1800);
-    });
-  });
-
-  // ---- Quick View Modal ----
-  const modal = document.getElementById('qvModal');
-  const qvTitle = document.getElementById('qvTitle');
-  const qvImage = document.getElementById('qvImage');
-  const qvPrice = document.getElementById('qvPrice');
-  const qvThumbs = document.getElementById('qvThumbs');
-  const qvView = document.getElementById('qvView');
-  const qvClose = document.getElementById('qvClose');
-  const qvAdd = document.getElementById('qvAdd');
-  const qvStatus = document.getElementById('qvStatus');
-
-  let currentItem = null;
-
-  function openModal(item){
-    currentItem = item;
-    qvStatus.textContent = '';
-
-    qvTitle.textContent = item.name;
-    qvPrice.textContent = item.price;
-    qvImage.src = item.front;
-    qvImage.alt = item.name;
-    qvView.href = item.link;
-
-    qvThumbs.innerHTML = '';
-    const imgs = [item.front].concat(item.back ? [item.back] : []);
-    imgs.forEach((src, idx) => {
-      const b = document.createElement('button');
-      b.className = 'thumb';
-      b.type = 'button';
-      b.innerHTML = `<img src="${src}" alt="">`;
-      b.addEventListener('click', () => { qvImage.src = src; });
-      qvThumbs.appendChild(b);
-    });
-
-    modal.setAttribute('aria-hidden', 'false');
-  }
-
-  function closeModal(){
-    modal.setAttribute('aria-hidden', 'true');
-    currentItem = null;
-  }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
-  });
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-  qvClose.addEventListener('click', closeModal);
-
-  document.querySelectorAll('.qv').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const card = btn.closest('.card');
-      const item = {
-        name: card.dataset.name,
-        price: card.dataset.price,
-        link: card.dataset.link,
-        front: card.dataset.front,
-        back: card.dataset.back || ''
-      };
-      openModal(item);
-    });
-  });
-
-  // Demo add-to-cart (stores in localStorage)
-  qvAdd.addEventListener('click', () => {
-    if (!currentItem) return;
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    cart.push({
-      id: (currentItem.name || '').toLowerCase().replace(/\s+/g,'-'),
-      name: currentItem.name,
-      price: currentItem.price,
-      image: currentItem.front,
-      qty: 1
-    });
-    localStorage.setItem('cart', JSON.stringify(cart));
-    qvStatus.textContent = 'Added to cart ✅ (demo)';
-  });
-</script>
 
 </body>
 </html>
@@ -837,6 +703,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 	</body>
 </html>
+
 
 
 
