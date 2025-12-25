@@ -383,12 +383,14 @@
     btn.addEventListener('click', () => {
       const card = btn.closest('.card');
       openModal({
-        name: card.dataset.name,
-        price: card.dataset.price,
-        link: card.dataset.link,
-        front: card.dataset.front,
-        back: card.dataset.back || ''
-      });
+  name: card.dataset.name,
+  price: card.dataset.price,
+  link: card.dataset.link,
+  front: card.dataset.front,
+  back: card.dataset.back || '',
+  checkout: card.dataset.checkout || ''
+});
+
     });
   });
 
