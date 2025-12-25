@@ -394,16 +394,17 @@
     });
   });
 
-  qvAdd.addEventListener('click', () => {
-    if (!currentItem) return;
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    cart.push({
-      id: (currentItem.name || 'item').toLowerCase().replace(/\s+/g,'-'),
-      name: currentItem.name,
-      price: currentItem.price,
-      image: currentItem.front,
-      qty: 1
-    });
+ qvAdd.addEventListener('click', () => {
+  if (!currentItem) return;
+
+  if (!currentItem.checkout) {
+    qvStatus.textContent = 'No checkout link set for this product yet.';
+    return;
+  }
+
+  window.open(currentItem.checkout, '_blank', 'noopener');
+});
+
     localStorage.setItem('cart', JSON.stringify(cart));
     qvStatus.textContent = 'Added to cart ✅ (demo)';
   });
