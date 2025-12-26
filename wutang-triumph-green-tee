@@ -173,13 +173,13 @@
       <!-- Thumbnails (add more images when you have them) -->
       <div class="thumbs" role="listbox" aria-label="Product images">
         <button class="thumb" aria-current="true" data-src="images/wutangforevergreen.jpg" aria-label="View image 1">
-          <img src="images/kidsgreenfrog.jpg" alt="">
+          <img src="images/wutangforevergreen.jpg" alt="">
         </button>
         <button class="thumb" aria-current="false" data-src="images/wutangforevergreen.jpg" aria-label="View image 2">
-          <img src="images/kidsgreenfrog.jpg" alt="">
+          <img src="images/wutangforevergreen.jpg" alt="">
         </button>
         <button class="thumb" aria-current="false" data-src="wutangforevergreen.jpg" aria-label="View image 3">
-          <img src="images/kidsgreenfrog.jpg" alt="">
+          <img src="images/wutangforevergreen.jpg" alt="">
         </button>
         <button class="thumb" aria-current="false" data-src="images/wutangforevergreen.jpg" aria-label="View image 4">
           <img src="images/wutangforevergreen.jpg" alt="">
@@ -195,7 +195,7 @@
 
       <a
   class="btn"
-  href="https://buy.stripe.com/cNi00j3wS1oA7fde6AfMA00"
+  href="https://buy.stripe.com/3cIeVc4WE6uTgY1a8rgA801"
   target="_blank"
   rel="noopener"
 >
