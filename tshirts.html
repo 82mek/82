@@ -322,16 +322,22 @@
     apply();
   }
 
-  // Hover swap front/back
-  function setBg(el, url){ el.style.backgroundImage = `url('${url}')`; }
-  cards.forEach(card => {
-    const imgLink = card.querySelector('.img');
-    const front = card.dataset.front;
-    const back = card.dataset.back;
-    if (!imgLink || !front) return;
-    card.addEventListener('mouseenter', () => { if (back) setBg(imgLink, back); });
-    card.addEventListener('mouseleave', () => { setBg(imgLink, front); });
-  });
+// Hover swap front/back (bind to the image link)
+function setBg(el, url){ el.style.backgroundImage = `url('${url}')`; }
+
+cards.forEach(card => {
+  const imgLink = card.querySelector('a.img'); // be specific
+  const front = card.dataset.front;
+  const back  = card.dataset.back;
+
+  if (!imgLink || !front) return;
+
+  // Ensure front is always the starting image
+  setBg(imgLink, front);
+
+  imgLink.addEventListener('mouseenter', () => { if (back) setBg(imgLink, back); });
+  imgLink.addEventListener('mouseleave', () => { setBg(imgLink, front); });
+});
 
   // Quick View modal
   const modal = document.getElementById('qvModal');
