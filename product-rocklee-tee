@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Kids Green Frog Tee | mek</title>
-<meta name="description" content="Kids Green Frog Tee — unique design with the environment in mind." />
+<meta name="description" content="Rock Lee — Don't skip leg day!." />
 <style>
   :root{
     --bg:#ffffff; --text:#0a0a0a; --muted:#6b7280;
@@ -160,42 +160,42 @@
 
 <main class="wrap page">
   <div class="crumbs">
-    <a href="index.html#shop">Shop</a> / <a href="index.html#tees">T-Shirts</a> / Kids Green Frog Tee
+    <a href="index.html#shop">Shop</a> / <a href="index.html#tees">T-Shirts</a> / Rock Lee - Don't Skip Leg Day
   </div>
 
   <section class="product">
     <!-- Gallery -->
     <div class="gallery">
       <div class="mainimg">
-        <img id="mainImage" src="images/kidsgreenfrog.jpg" alt="Kids Green Frog Tee design">
+        <img id="mainImage" src="images/rockleefront.jpg" alt="Rock Lee - Don't Skip Leg Day design">
       </div>
 
       <!-- Thumbnails (add more images when you have them) -->
       <div class="thumbs" role="listbox" aria-label="Product images">
-        <button class="thumb" aria-current="true" data-src="images/kidsgreenfrog.jpg" aria-label="View image 1">
-          <img src="images/kidsgreenfrog.jpg" alt="">
+        <button class="thumb" aria-current="true" data-src="images/rockleefront.jpg" aria-label="View image 1">
+          <img src="images/rockleefront.jpg" alt="">
         </button>
-        <button class="thumb" aria-current="false" data-src="images/kidsgreenfrog.jpg" aria-label="View image 2">
-          <img src="images/kidsgreenfrog.jpg" alt="">
+        <button class="thumb" aria-current="false" data-src="images/rockleeback.jpg" aria-label="View image 2">
+          <img src="images/rockleeback.jpg" alt="">
         </button>
-        <button class="thumb" aria-current="false" data-src="images/kidsgreenfrog.jpg" aria-label="View image 3">
-          <img src="images/kidsgreenfrog.jpg" alt="">
+        <button class="thumb" aria-current="false" data-src="images/rockleefront.jpg" aria-label="View image 3">
+          <img src="images/rockleefront.jpg" alt="">
         </button>
-        <button class="thumb" aria-current="false" data-src="images/kidsgreenfrog.jpg" aria-label="View image 4">
-          <img src="images/kidsgreenfrog.jpg" alt="">
+        <button class="thumb" aria-current="false" data-src="images/rockleeback.jpg" aria-label="View image 4">
+          <img src="images/rockleeback.jpg" alt="">
         </button>
       </div>
     </div>
 
     <!-- Buy panel -->
     <aside class="panel">
-      <h1>Kids Green Frog Tee</h1>
+      <h1>Rock Lee - Don't Skip Leg Day Tee</h1>
       <p class="sub">Regular Fit — 180 GSM • 100% Cotton</p>
       <div class="price">$20.00</div>
 
       <a
   class="btn"
-  href="https://buy.stripe.com/cNi00j3wS1oA7fde6AfMA00"
+  href="https://buy.stripe.com/cNicN4gFm3iH0Z3gwPgA802"
   target="_blank"
   rel="noopener"
 >
@@ -277,12 +277,12 @@
     }
 
     const item = {
-      id: 'kids-green-frog-tee',
-      name: 'Kids Green Frog Tee',
-      price: 27.00,
+      id: 'Rock Lee Don't Skip Leg Day',
+      name: 'Rock Lee Don't Skip Leg Day',
+      price: 20.00,
       size,
       qty,
-      image: 'images/kidsgreenfrog.jpg'
+      image: 'images/rockleefront.jpg'
     };
 
     const cart = JSON.parse(localStorage.getItem('cart') || '[]');
