@@ -1,0 +1,294 @@
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shinobi | mek</title>
+<meta name="description" content="Kids Rabbit Teal" />
+<style>
+  :root{
+    --bg:#ffffff; --text:#0a0a0a; --muted:#6b7280;
+    --line:#e5e7eb; --soft:#f7f7f8;
+    --accent:#111111; --maxw:1180px; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; font:15px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--text); background:var(--bg)}
+  a{color:inherit; text-decoration:none}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+
+  header{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.9); backdrop-filter:saturate(180%) blur(8px); border-bottom:1px solid var(--line)}
+  .nav{display:grid; grid-template-columns:160px 1fr 200px; align-items:center; height:70px; gap:12px}
+  .logo{font-weight:700; letter-spacing:.4px}
+  .menu{display:flex; gap:18px; justify-content:center; font-size:14px}
+  .menu a{padding:8px 6px}
+  .tools{display:flex; gap:8px; justify-content:flex-end; align-items:center}
+  .toolbtn{padding:8px 10px; border:1px solid var(--line); border-radius:999px}
+
+  .crumbs{padding:14px 0; color:var(--muted); font-size:13px}
+  .crumbs a{color:inherit; text-decoration:underline; text-underline-offset:2px}
+  .page{padding:18px 0 40px}
+
+  .product{
+    display:grid;
+    grid-template-columns: 1.2fr .8fr;
+    gap:26px;
+    align-items:start;
+  }
+
+  .gallery{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap:12px;
+  }
+  .mainimg{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    overflow:hidden;
+    background:var(--soft);
+    aspect-ratio: 1/1;
+    display:grid;
+    place-items:center;
+  }
+  .mainimg img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:center;
+    display:block;
+  }
+  .thumbs{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+  }
+  .thumb{
+    border:1px solid var(--line);
+    border-radius:12px;
+    overflow:hidden;
+    background:var(--soft);
+    aspect-ratio: 1/1;
+    cursor:pointer;
+  }
+  .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+  .thumb[aria-current="true"]{outline:2px solid #111; outline-offset:2px}
+
+  .panel{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:16px;
+    background:#fff;
+  }
+  h1{margin:0 0 6px; font-size:24px; line-height:1.2}
+  .sub{color:var(--muted); margin:0 0 12px}
+  .price{font-size:18px; font-weight:700; margin:10px 0 12px}
+
+  .row{display:flex; gap:10px; flex-wrap:wrap; margin:10px 0}
+  label{font-size:13px; color:var(--muted)}
+  select, button, input{
+    font:inherit;
+  }
+  select{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:#fff;
+    outline:none;
+  }
+  .qty{
+    width:110px;
+    padding:10px 12px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    outline:none;
+  }
+
+  .btn{
+    display:inline-block;
+    padding:12px 14px;
+    border-radius:999px;
+    border:1px solid #111;
+    background:#111;
+    color:#fff;
+    font-weight:600;
+    cursor:pointer;
+    width:100%;
+    text-align:center;
+  }
+  .btn.secondary{
+    background:#fff;
+    color:#111;
+    border-color:var(--line);
+  }
+  .note{font-size:13px; color:var(--muted); margin-top:10px}
+
+  .details{
+    margin-top:16px;
+    border-top:1px solid var(--line);
+    padding-top:14px;
+  }
+  .details h3{margin:0 0 8px; font-size:14px}
+  .details ul{margin:0; padding-left:18px; color:var(--text)}
+  .details li{margin:6px 0}
+
+  .divider{height:1px; background:var(--line); margin:18px 0}
+
+  @media (max-width: 900px){
+    .product{grid-template-columns:1fr}
+    .thumbs{grid-template-columns:repeat(4,1fr)}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><a href="index.html">mek.</a></div>
+    <nav class="menu">
+      <a href="index.html#men">T-Shirts</a>
+      <a href="index.html#women">Hoodies</a>
+      <a href="index.html#kids">Pants</a>
+      <a href="index.html#headwear">Jumpers</a>
+      <a href="index.html#accessories">Accessories</a>
+    </nav>
+    <div class="tools">
+      <a class="toolbtn" href="index.html#account">👤</a>
+      <a class="toolbtn" href="index.html#cart">🛒</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap page">
+  <div class="crumbs">
+    <a href="index.html#shop">Shop</a> / <a href="index.html#tees">T-Shirts</a> / Shinobi
+  </div>
+
+  <section class="product">
+    <!-- Gallery -->
+    <div class="gallery">
+      <div class="mainimg">
+        <img id="mainImage" src="images/shinobifront.jpg" alt="Kids Rabbit Teal">
+      </div>
+
+      <!-- Thumbnails (add more images when you have them) -->
+      <div class="thumbs" role="listbox" aria-label="Product images">
+        <button class="thumb" aria-current="true" data-src="images/shinobifront.jpg" aria-label="View image 1">
+          <img src="images/shinobifront.jpg" alt="">
+        </button>
+        <button class="thumb" aria-current="false" data-src="images/shinobiback.jpg" aria-label="View image 2">
+          <img src="images/shinobiback.jpg" alt="">
+        </button>
+       
+      </div>
+    </div>
+
+    <!-- Buy panel -->
+    <aside class="panel">
+      <h1>Shinobi</h1>
+      <p class="sub">Regular Fit — 180 GSM • 100% Cotton</p>
+      <div class="price">$20.00</div>
+
+      <a
+  class="btn"
+  href="https://buy.stripe.com/9B6dR874M06vePT0xRgA807"
+  target="_blank"
+  rel="noopener"
+>
+  Buy now — $20
+</a>
+<p style="font-size:13px; color:#6b7280; margin-top:8px">
+  Select size at checkout
+</p>
+
+      <div class="row" style="flex-direction:column">
+        <label for="size">Size</label>
+        <select id="size">
+          <option value="" selected disabled>Choose a size</option>
+          <option>XS</option><option>S</option><option>M</option><option>L</option><option>XL</option>
+        </select>
+      </div>
+
+      <div class="row" style="align-items:end">
+        <div style="flex:1">
+          <label for="qty">Quantity</label><br>
+          <input id="qty" class="qty" type="number" min="1" value="1">
+        </div>
+        <div style="flex:2">
+          <button class="btn" id="addToCartBtn" type="button">Add to cart</button>
+        </div>
+      </div>
+
+      <div class="row">
+        <a class="btn secondary" href="index.html#shop">← Back to shop</a>
+      </div>
+
+      <p class="note" id="status" aria-live="polite"></p>
+
+      <div class="details">
+        <h3>Details</h3>
+        <ul>
+          <li>Soft hand-feel, everyday wear</li>
+          <li>Print: eco-conscious inks (update this if needed)</li>
+          <li>Care: cold wash, line dry</li>
+        </ul>
+
+        <div class="divider"></div>
+
+        <h3>Shipping & Returns</h3>
+        <ul>
+          <li>Ships in 1–3 business days</li>
+          <li>30-day returns (unworn, unwashed)</li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<script>
+  // Thumbnail click -> swap main image
+  const mainImage = document.getElementById('mainImage');
+  const thumbs = document.querySelectorAll('.thumb');
+  thumbs.forEach(btn => {
+    btn.addEventListener('click', () => {
+      thumbs.forEach(b => b.setAttribute('aria-current', 'false'));
+      btn.setAttribute('aria-current', 'true');
+      mainImage.src = btn.dataset.src;
+    });
+  });
+
+
+
+  
+  // Placeholder "Add to cart" (stores in localStorage so you can build cart later)
+  const btn = document.getElementById('addToCartBtn');
+  const status = document.getElementById('status');
+  btn.addEventListener('click', () => {
+    const size = document.getElementById('size').value;
+    const qty = Math.max(1, parseInt(document.getElementById('qty').value || '1', 10));
+
+    if (!size) {
+      status.textContent = 'Please choose a size.';
+      return;
+    }
+
+    const item = {
+      id: 'Shinobi',
+      name: 'Shinobi',
+      price: 20.00,
+      size,
+      qty,
+      image: 'images/shinobifront.jpg'
+    };
+
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cart.push(item);
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    status.textContent = `Added ${qty} × (${size}) to cart ✅`;
+  });
+</script>
+</body>
+</html>
