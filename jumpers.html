@@ -1,1 +1,426 @@
 
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jumpers | mek</title>
+  <meta name="description" content="All mek designs." />
+  <style>
+    :root{
+      --bg:#ffffff; --text:#0a0a0a; --muted:#6b7280;
+      --line:#e5e7eb; --soft:#f7f7f8;
+      --accent:#111111; --maxw:1180px; --radius:14px;
+    }
+    *{box-sizing:border-box}
+    body{margin:0; font:15px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--text); background:var(--bg)}
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+
+    header{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.9); backdrop-filter:saturate(180%) blur(8px); border-bottom:1px solid var(--line)}
+    .nav{display:grid; grid-template-columns:160px 1fr 200px; align-items:center; height:70px; gap:12px}
+    .logo{font-weight:700; letter-spacing:.4px}
+    .menu{display:flex; gap:18px; justify-content:center; font-size:14px}
+    .menu a{padding:8px 6px}
+    .tools{display:flex; gap:8px; justify-content:flex-end; align-items:center}
+    .toolbtn{padding:8px 10px; border:1px solid var(--line); border-radius:999px; background:#fff}
+
+    .pagehead{padding:22px 0 10px}
+    .pagehead h1{margin:0 0 6px; font-size:24px}
+    .pagehead p{margin:0; color:var(--muted)}
+
+    .bar{display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap; padding:14px 0}
+    .search{display:flex; align-items:center; gap:8px; border:1px solid var(--line); padding:10px 12px; border-radius:999px; min-width:260px; background:#fff}
+    .search input{border:none; outline:none; width:100%; background:transparent}
+    .chipset{display:flex; gap:8px; flex-wrap:wrap}
+    .chip{border:1px solid var(--line); border-radius:999px; padding:8px 12px; font-size:13px; background:#fff; cursor:pointer}
+    .chip[aria-pressed="true"]{border-color:#111}
+
+    .products{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; padding:10px 0 40px}
+    .card{position:relative; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:#fff}
+    .card .img{aspect-ratio: 1/1; background:#eee center/cover no-repeat; display:block; transition: background-image .25s ease;}
+    .card .copy{padding:12px}
+    .title{font-size:14px; font-weight:600; margin:0 0 2px}
+    .meta{font-size:13px; color:var(--muted); margin:0 0 8px}
+    .price{font-size:14px}
+
+    /* Quick View button */
+    .qv{
+      position:absolute;
+      left:12px;
+      right:12px;
+      bottom:64px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.92);
+      font-weight:600;
+      cursor:pointer;
+      opacity:0;
+      transform:translateY(6px);
+      transition:opacity .18s ease, transform .18s ease;
+    }
+    .card:hover .qv{opacity:1; transform:translateY(0)}
+    @media (max-width:760px){ .qv{opacity:1; transform:none} }
+
+    /* Back-view hint */
+.back-hint{
+  position:absolute;
+  bottom:12px;
+  right:12px;
+  font-size:11px;
+  color:#111;
+  background:rgba(255,255,255,.85);
+  padding:4px 8px;
+  border-radius:999px;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .15s ease;
+}
+
+.card:hover .back-hint{
+  opacity:1;
+}
+
+
+    /* Modal */
+    .modal{
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.55);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:18px;
+      z-index:999;
+    }
+    .modal[aria-hidden="false"]{display:flex}
+    .modal .box{
+      width:min(920px, 100%);
+      background:#fff;
+      border-radius:var(--radius);
+      overflow:hidden;
+      border:1px solid var(--line);
+    }
+    .modal .top{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      border-bottom:1px solid var(--line);
+      padding:12px 16px;
+    }
+    .modal .inner{display:grid; grid-template-columns: 1.1fr .9fr}
+    @media (max-width:900px){ .modal .inner{grid-template-columns:1fr} }
+    .modal .mimg{aspect-ratio:1/1; background:var(--soft)}
+    .modal .mimg img{width:100%; height:100%; object-fit:cover; display:block}
+    .modal .panel{padding:16px}
+    .modal .close{
+      border:1px solid var(--line);
+      background:#fff;
+      border-radius:999px;
+      padding:8px 10px;
+      cursor:pointer;
+    }
+    .modal .thumbs{display:flex; gap:8px; margin-top:10px}
+    .modal .thumb{
+      width:64px; height:64px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      overflow:hidden;
+      background:var(--soft);
+      cursor:pointer;
+    }
+    .modal .thumb img{width:100%; height:100%; object-fit:cover; display:block}
+    .modal .actions{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+    .modal .btn{
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid #111;
+      background:#111;
+      color:#fff;
+      font-weight:600;
+    }
+    .modal .btn.secondary{background:#fff; color:#111; border-color:var(--line)}
+
+    footer{background:#0f0f10; color:#cbd5e1; margin-top:18px}
+    .footwrap{max-width:var(--maxw); margin:0 auto; padding:14px 20px}
+    .copyright{border-top:1px solid #1f2937; padding:14px 0; color:#94a3b8; font-size:13px}
+
+    @media (max-width:1000px){ .products{grid-template-columns:repeat(3,1fr)} .nav{grid-template-columns:140px 1fr 160px} }
+    @media (max-width:760px){ .menu{display:none} .products{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:460px){ .products{grid-template-columns:1fr} }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><a href="index.html">mek.</a></div>
+
+    <nav class="menu">
+      <a href="tshirts.html">T-Shirts</a>
+      <a href="hoodies.html">Hoodies</a>
+      <a href="pants.html">Pants</a>
+      <a href="jumpers.html">Jumpers</a>
+    </nav>
+
+    <div class="tools">
+      <a class="toolbtn" href="index.html#shop">Shop</a>
+      <a class="toolbtn" href="#cart">🛒</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="pagehead">
+    <h1>Pants</h1>
+    <p>All mek pants designs. Click a design to view details.</p>
+  </div>
+
+  <div class="bar">
+    <div class="search">
+      <span style="opacity:.7">🔍</span>
+      <input id="q" type="search" placeholder="Search tees (e.g., animals, wwriting, pop culture)">
+    </div>
+
+    <div class="chipset" aria-label="Filters">
+      <button class="chip" aria-pressed="false" data-filter="all" type="button">All</button>
+      <button class="chip" aria-pressed="false" data-filter="kids" type="button">Kids</button>
+      <button class="chip" aria-pressed="false" data-filter="nature" type="button">Nature</button>
+      <button class="chip" aria-pressed="false" data-filter="graphic" type="button">Graphic</button>
+    </div>
+  </div>
+
+  <section class="products" id="grid">
+
+    <article class="card" data-tags="swallow jumper"
+      data-name="Blue Pink Swallow" data-price="$30.00" data-link="product-bluepinkswallow.html"
+      data-front="images/bluepinksallow.jpg">
+      <a class="img" href="product-bluepinkswallow.html" style="background-image:url('images/bluepinkswallow.jpg')"></a>
+      <span class="back-hint">Hover for back</span>
+
+      <button class="qv" type="button">Quick view</button>
+      <div class="copy">
+        <div class="title">Blue Pink Swallow</div>
+        <div class="meta">Regular Fit — 180 GSM</div>
+        <div class="price">$30.00</div>
+      </div>
+    </article>
+
+    <article class="card" data-tags="mek jumper"
+      data-name="blue green mek" data-price="$30.00" data-link="product-bluegreenmekjumper.html"
+      data-front="images/bluegreenmekjumper.jpg">
+      <a class="img" href="product-bluegreenmekjumper.html" style="background-image:url('images/bluegreenmekjumper.jpg')"></a>
+      <button class="qv" type="button">Quick view</button>
+      <div class="copy">
+        <div class="title">Blue Green Mek Jumper</div>
+        <div class="meta">Regular Fit — 180 GSM</div>
+        <div class="price">$30.00</div>
+      </div>
+    </article>
+
+        <article class="card" data-tags="mek jumper"
+      data-name="Grey Green Mek Jumper" data-price="$30.00" data-link="product-greygreenmekjumper.html"
+      data-front="images/greygreenmekjumper.jpg">
+      <a class="img" href="product-greygreenmekjumper.html" style="background-image:url('images/greygreenmekjumper.jpg')"></a>
+      <button class="qv" type="button">Quick view</button>
+      <div class="copy">
+        <div class="title">Grey Green Mek Jumper</div>
+        <div class="meta">Regular Fit — 180 GSM</div>
+        <div class="price">$30.00</div>
+      </div>
+    </article>
+
+        <article class="card" data-tags="swallow jumper"
+      data-name="Blue Pink Swallow Jumper" data-price="$30.00" data-link="product-swallowbluepink.html"
+      data-front="images/swallowbluepink.jpg">
+      <a class="img" href="product-swallowbluepink.html" style="background-image:url('images/swallowbluepink.jpg')"></a>
+      <button class="qv" type="button">Quick view</button>
+      <div class="copy">
+        <div class="title">Blue Pink Swallow Jumper</div>
+        <div class="meta">Regular Fit — 180 GSM</div>
+        <div class="price">$30.00</div>
+      </div>
+    </article>
+
+        <article class="card" data-tags="wavy mek jumper"
+      data-name="Dark Blue Blue Wavy Mek Jumper" data-price="$30.00" data-link="product-bluebluewavymekjumper.html"
+      data-front="images/bluebluewavymekjumper.jpg">
+      <a class="img" href="product-bluebluewavymekjumper.html" style="background-image:url('images/bluebluewavymekjumper.jpg')"></a>
+      <button class="qv" type="button">Quick view</button>
+      <div class="copy">
+        <div class="title">Dark Blue Blue Wavy Mek</div>
+        <div class="meta">Regular Fit — 180 GSM</div>
+        <div class="price">$30.00</div>
+      </div>
+    </article>
+
+         <article class="card" data-tags="vertical mek jumper"
+      data-name="Blue White Vertical Mek Jumper" data-price="$30.00" data-link="product-bluewhiteverticalmekjumper.html"
+      data-front="images/bluewhiteverticalmekjumper.jpg">
+      <a class="img" href="product-bluewhiteverticalmekjumper.html" style="background-image:url('images/bluewhiteverticalmekjumper.jpg')"></a>
+      <button class="qv" type="button">Quick view</button>
+      <div class="copy">
+        <div class="title">Blue White Vertical Mek Jumper</div>
+        <div class="meta">Regular Fit — 180 GSM</div>
+        <div class="price">$30.00</div>
+      </div>
+    </article>
+
+</main>
+
+<footer>
+  <div class="footwrap copyright">© <span id="y"></span> mek.</div>
+</footer>
+
+<!-- Modal -->
+<div class="modal" id="qvModal" aria-hidden="true" role="dialog" aria-label="Quick view">
+  <div class="box">
+    <div class="top">
+      <strong id="qvTitle">Quick view</strong>
+      <button class="close" id="qvClose" type="button">✕</button>
+    </div>
+    <div class="inner">
+      <div class="mimg"><img id="qvImage" src="" alt=""></div>
+      <div class="panel">
+        <div style="color:var(--muted); font-size:13px; margin-bottom:6px">Regular Fit — 180 GSM</div>
+        <div style="font-size:18px; font-weight:700" id="qvPrice"></div>
+        <div class="thumbs" id="qvThumbs"></div>
+        <div class="actions">
+          <a class="btn" id="qvView" href="#">View product page</a>
+          <button class="btn secondary" id="qvAdd" type="button">Buy now</button>
+
+        </div>
+        <p id="qvStatus" style="color:var(--muted); font-size:13px; margin-top:10px"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Footer year
+  const y = document.getElementById('y');
+  if (y) y.textContent = new Date().getFullYear();
+
+  // Search + filter
+  const q = document.getElementById('q');
+  const cards = Array.from(document.querySelectorAll('.card'));
+  const chips = Array.from(document.querySelectorAll('.chip'));
+  let activeFilter = 'all';
+
+  function apply() {
+    const term = (q?.value || '').trim().toLowerCase();
+    cards.forEach(card => {
+      const text = (card.innerText || '').toLowerCase();
+      const tags = (card.dataset.tags || '').toLowerCase();
+      const matchesSearch = !term || text.includes(term) || tags.includes(term);
+      const matchesFilter = activeFilter === 'all' || tags.includes(activeFilter);
+      card.style.display = (matchesSearch && matchesFilter) ? '' : 'none';
+    });
+  }
+  if (q) q.addEventListener('input', apply);
+
+  if (chips.length) {
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
+        chip.setAttribute('aria-pressed', 'true');
+        activeFilter = chip.dataset.filter || 'all';
+        apply();
+      });
+    });
+    const allChip = chips.find(c => c.dataset.filter === 'all');
+    if (allChip) allChip.click();
+  } else {
+    apply();
+  }
+
+// Hover swap front/back (bind to the image link)
+function setBg(el, url){ el.style.backgroundImage = `url('${url}')`; }
+
+cards.forEach(card => {
+  const imgLink = card.querySelector('a.img'); // be specific
+  const front = card.dataset.front;
+  const back  = card.dataset.back;
+
+  if (!imgLink || !front) return;
+
+  // Ensure front is always the starting image
+  setBg(imgLink, front);
+
+  imgLink.addEventListener('mouseenter', () => { if (back) setBg(imgLink, back); });
+  imgLink.addEventListener('mouseleave', () => { setBg(imgLink, front); });
+});
+
+  // Quick View modal
+  const modal = document.getElementById('qvModal');
+  const qvTitle = document.getElementById('qvTitle');
+  const qvImage = document.getElementById('qvImage');
+  const qvPrice = document.getElementById('qvPrice');
+  const qvThumbs = document.getElementById('qvThumbs');
+  const qvView = document.getElementById('qvView');
+  const qvClose = document.getElementById('qvClose');
+  const qvAdd = document.getElementById('qvAdd');
+  const qvStatus = document.getElementById('qvStatus');
+  let currentItem = null;
+
+  function openModal(item){
+    currentItem = item;
+    qvStatus.textContent = '';
+    qvTitle.textContent = item.name || 'Quick view';
+    qvPrice.textContent = item.price || '';
+    qvImage.src = item.front || '';
+    qvImage.alt = item.name || '';
+    qvView.href = item.link || '#';
+
+    qvThumbs.innerHTML = '';
+    const imgs = [item.front].filter(Boolean).concat(item.back ? [item.back] : []);
+    imgs.forEach(src => {
+      const b = document.createElement('button');
+      b.className = 'thumb';
+      b.type = 'button';
+      b.innerHTML = `<img src="${src}" alt="">`;
+      b.addEventListener('click', () => { qvImage.src = src; });
+      qvThumbs.appendChild(b);
+    });
+
+    modal.setAttribute('aria-hidden', 'false');
+  }
+
+  function closeModal(){
+    modal.setAttribute('aria-hidden', 'true');
+    currentItem = null;
+  }
+
+  qvClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
+  });
+
+  document.querySelectorAll('.qv').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.card');
+      openModal({
+  name: card.dataset.name,
+  price: card.dataset.price,
+  link: card.dataset.link,
+  front: card.dataset.front,
+  back: card.dataset.back || '',
+  checkout: card.dataset.checkout || ''
+});
+
+    });
+  });
+
+ qvAdd.addEventListener('click', () => {
+  if (!currentItem) return;
+
+  if (!currentItem.checkout) {
+    qvStatus.textContent = 'No checkout link set for this product yet.';
+    return;
+  }
+
+  window.open(currentItem.checkout, '_blank', 'noopener');
+});
+</script>
+
