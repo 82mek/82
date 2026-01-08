@@ -114,6 +114,19 @@
     .foot{grid-template-columns:1fr}
   }
 </style>
+		<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const audio = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicBtn');
+  if (!audio || !btn) return;
+
+  btn.addEventListener('click', async () => {
+    try { await audio.play(); }
+    catch(e){ console.log('Audio play blocked:', e); }
+  });
+});
+</script>
+
 </head>
 <body>
 
@@ -716,6 +729,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 	</body>
 </html>
+
 
 
 
