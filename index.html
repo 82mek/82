@@ -113,6 +113,13 @@
     .products,.grid4{grid-template-columns:1fr}
     .foot{grid-template-columns:1fr}
   }
+	.tile .img{
+  transition: opacity .35s ease;
+}
+.tile .img.fade-out{
+  opacity:0;
+}
+
 </style>
 		<script>
 document.addEventListener('DOMContentLoaded', () => {
@@ -747,6 +754,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 	</body>
 </html>
+
 
 
 
