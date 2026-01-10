@@ -27,6 +27,782 @@
     --maxw:1180px; --radius:14px;
   }
   *{box-sizing:border-box}
+  body{margin:0; font:15px/1.6 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; color:var(--text); background:var(--bg)}
+  a{color:inherit; text-decoration:none}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px}
+
+  /* Top bar */
+  .topbar{background:#111; color:#fff; font-size:12px}
+  .topbar .wrap{display:flex; gap:16px; justify-content:center; padding:8px 20px}
+  .topbar a{color:#fff; text-decoration:underline}
+
+  /* Header */
+  header{position:sticky; top:0; z-index:50; background:rgba(255,255,255,.9); backdrop-filter:saturate(180%) blur(8px); border-bottom:1px solid var(--line)}
+  .nav{display:grid; grid-template-columns:160px 1fr 200px; align-items:center; height:70px; gap:12px}
+  .logo{font-weight:700; letter-spacing:.4px}
+  .menu{display:flex; gap:18px; justify-content:center; font-size:14px}
+  .menu a{padding:8px 6px}
+  .tools{display:flex; gap:8px; justify-content:flex-end; align-items:center}
+  .search{display:flex; align-items:center; gap:8px; border:1px solid var(--line); padding:8px 10px; border-radius:999px; width:100%}
+  .search input{border:none; outline:none; width:100%; background:transparent}
+  .icon{font-size:13px; opacity:.7}
+  .toolbtn{padding:8px 10px; border:1px solid var(--line); border-radius:999px}
+
+  /* Hero */
+  .hero{position:relative}
+  .hero .media{aspect-ratio: 21/9; width:100%; background:#ddd url('images/wugirl.jpg') center/cover no-repeat}
+  .hero .copy{position:absolute; inset:auto auto 8% 50%; transform:translateX(-50%); text-align:center; color:#fff}
+  .hero h1{margin:0 0 .3rem; font-size:clamp(28px,5vw,48px); line-height:1.1; text-shadow:0 2px 20px rgba(0,0,0,.4)}
+  .hero p{margin:.2rem 0 1rem; opacity:.95}
+  .btn{display:inline-block; padding:10px 16px; border:1px solid #fff; border-radius:999px; color:#fff; background:rgba(0,0,0,.25)}
+  .btn.dark{border-color:#111; background:#111; color:#fff}
+
+  /* Categories */
+  .cats{padding:24px 0 10px}
+  .grid4{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+  .tile{position:relative; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--soft)}
+  .tile .img{aspect-ratio: 4/5; background:#dcdcdc url('images/cat-1.jpg') center/cover no-repeat}
+  .tile .label{position:absolute; left:12px; bottom:12px; background:#fff; padding:8px 10px; border-radius:999px; font-weight:600; font-size:14px}
+
+  /* Product grid */
+  .section{padding:24px 0}
+  .section h2{margin:0 0 .5rem; font-size:20px}
+  .products{display:grid; grid-template-columns:repeat(4,1fr); gap:18px}
+  .card{border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:#fff}
+  .card .img{aspect-ratio: 1/1; background:#eee url('images/prod-1.jpg') center/cover no-repeat; position:relative}
+  .badge{position:absolute; left:10px; top:10px; background:#111; color:#fff; font-size:12px; padding:6px 8px; border-radius:999px}
+  .card .copy{padding:12px}
+  .title{font-size:14px; font-weight:600; margin:0 0 2px}
+  .meta{font-size:13px; color:var(--muted); margin:0 0 8px}
+  .price{font-size:14px}
+  .swatches{display:flex; gap:6px; margin-top:8px}
+  .dot{width:16px; height:16px; border-radius:50%; border:1px solid #d1d5db}
+  .dot.black{background:#111} .dot.grey{background:#9ca3af} .dot.navy{background:#1f2937} .dot.white{background:#fff}
+
+  /* USP / Promo band */
+  .usp{margin:32px 0; background:var(--soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+  .usp .wrap{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:18px 20px}
+  .usp .item{display:flex; gap:12px; align-items:center}
+  .usp .ic{width:28px; height:28px; border-radius:50%; border:1px solid var(--line); display:grid; place-items:center; font-size:12px}
+  .usp .txt{font-size:14px}
+
+  /* Newsletter */
+  .news{padding:26px 0}
+  .news .box{border:1px solid var(--line); border-radius:var(--radius); padding:20px; display:flex; gap:14px; align-items:center; justify-content:space-between; flex-wrap:wrap}
+  .field{display:flex; align-items:center; gap:8px; border:1px solid var(--line); padding:10px 12px; border-radius:999px; min-width:240px}
+  .field input{border:none; outline:none; background:transparent; width:220px}
+  .cta{padding:10px 16px; border-radius:999px; background:#111; color:#fff; border:1px solid #111}
+
+  /* Footer */
+  footer{background:#0f0f10; color:#cbd5e1; margin-top:18px}
+  .foot{display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:20px; padding:40px 20px}
+  .foot h4{margin:0 0 8px; font-size:14px; color:#fff}
+  .foot a{color:#cbd5e1; font-size:14px; display:block; padding:4px 0}
+  .copyright{border-top:1px solid #1f2937; padding:14px 0; color:#94a3b8; font-size:13px}
+
+  /* Responsive */
+  @media (max-width: 1000px){ .products{grid-template-columns:repeat(3,1fr)} .grid4{grid-template-columns:repeat(3,1fr)} .nav{grid-template-columns:140px 1fr 160px} }
+  @media (max-width: 760px){
+    .menu{display:none}
+    .products,.grid4{grid-template-columns:repeat(2,1fr)}
+    .hero .copy{inset:auto 0 6% 0; transform:none; padding:0 18px}
+    .usp .wrap{grid-template-columns:1fr}
+    .foot{grid-template-columns:1fr 1fr}
+  }
+  @media (max-width: 460px){
+    .products,.grid4{grid-template-columns:1fr}
+    .foot{grid-template-columns:1fr}
+  }
+</style>
+		<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const audio = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicBtn');
+  if (!audio || !btn) return;
+
+  btn.addEventListener('click', async () => {
+    try { await audio.play(); }
+    catch(e){ console.log('Audio play blocked:', e); }
+  });
+});
+</script>
+
+</head>
+<body>
+
+  <!-- Announcement -->
+  <div class="topbar">
+    <div class="wrap">⚡ End-of-season: choose any 5+ items, get 25% off — <a href="#shop">Shop now</a></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="wrap nav">
+      <div class="logo"><a href="/">mek</a></div>
+     <nav class="menu">
+  <a href="tshirts.html">T-Shirts</a>
+  <a href="hoodies.html">Hoodies</a>
+  <a href="pants.html">Pants</a>
+  <a href="jumpers.html">Jumpers</a>
+</nav>
+
+      <div class="tools">
+        <div class="search">
+          <span class="icon">🔍</span>
+          <input aria-label="Search" placeholder="Search products...">
+        </div>
+        <a class="toolbtn" href="#account">👤</a>
+        <a class="toolbtn" href="#cart">🛒</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="media"></div>
+    <div class="copy">
+      <h1>mek.</h1>
+      <p>unique designs with the environment in mind</p>
+      <a class="btn" href="#shop">Shop Collection</a>
+    </div>
+  </section>
+<!-- Categories -->
+<section class="cats wrap" id="shop">
+  <div class="grid4">
+
+    <a class="tile" href="tshirts.html">
+      <div class="img" style="background-image:url('images/wutangforevergreen.jpg')"></div>
+      <div class="label">T-Shirts</div>
+		<div class="img tile-rotator"
+  data-interval="2200"
+  data-images="
+	images/wutangforevergreen.jpg
+    images/kidsgreenfrog.jpg,
+    images/rockleefront.jpg,
+    images/wutangforeverblue.jpg,
+    images/section8.jpg
+	images/chunlired.jpg
+	images/frogblueorangegreen.jpg
+	images/shinobifront.jpg
+	images/rabbittealback.jpg
+	images/rockleeback.jpg
+	images/rabbitblueblueback.jpg
+  "
+  style="background-image:url('images/kidsgreenfrog.jpg')">
+</div>
+
+    </a>
+
+    <a class="tile" href="hoodies.html">
+      <div class="img" style="background-image:url('images/rabbitbluehoodie.jpg')"></div>
+      <div class="label">Hoodies</div>
+    </a>
+
+    <a class="tile" href="pants.html">
+      <div class="img" style="background-image:url('images/mekbluegreenpants.jpg')"></div>
+      <div class="label">Pants</div>
+    </a>
+
+    <a class="tile" href="jumpers.html">
+      <div class="img" style="background-image:url('images/wavymek.jpg')"></div>
+      <div class="label">Jumpers</div>
+    </a>
+
+  </div>
+</section>
+
+
+  <!-- USP band -->
+  <section class="usp">
+    <div class="wrap">
+      <div class="item"><div class="ic">🚚</div><div class="txt">Fast shipping & easy returns</div></div>
+      <div class="item"><div class="ic">🧵</div><div class="txt">Premium fabrics, built to last</div></div>
+      <div class="item"><div class="ic">♻️</div><div class="txt">Sustainable options available</div></div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="news wrap">
+    <div class="box">
+      <div><strong>Stay in the loop</strong><br><span style="color:var(--muted)">Product drops, promos, and more.</span></div>
+      <div class="field"><span class="icon">✉️</span><input placeholder="Your email"></div>
+      <button class="cta">Subscribe</button>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap foot">
+      <div>
+        <h4>About YourBrand</h4>
+        <p style="margin:0; color:#9aa3af;">Quality blanks and everyday pieces designed in Sydney.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <a href="#tees">T-Shirts</a><a href="#hoods">Hoodies</a><a href="#headwear">Headwear</a><a href="#accessories">Accessories</a>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <a href="#shipping">Shipping</a><a href="#returns">Returns</a><a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <a href="#about">About</a><a href="#stores">Store Locations</a><a href="#sustainability">Sustainability</a>
+      </div>
+    </div>
+    <div class="wrap copyright">© <span id="y"></span> YourBrand</div>
+  </footer>
+
+
+
+</body>
+</html>
+
+<!--
+<!DOCTYPE HTML>
+<!--
+	
+
+<html>
+	<head>
+		<title>Fractal by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+  #phone-slider {
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+  }
+
+  #phone-slider.fade-out {
+    opacity: 0;
+  }
+</style>
+
+	</head>
+	<body class="is-preload">
+
+		<!-- Header 
+			<header id="header">
+  <div class="content">
+    <h1><a href="#">82</a></h1>
+    <p>street wear <!a href="http://html5up.net"></a></p>
+    <ul class="actions">
+      <li><a href="#" class="button primary icon solid fa-download">Catalogue</a></li>
+      <li><a href="#one" class="button icon solid fa-chevron-down scrolly">Learn More</a></li>
+    </ul>
+  </div>
+  <!--<div class="image phone">
+    <div class="inner">
+      <img id="phone-slider" src="images/infinity22.jpg" alt="" />
+	    
+    </div>
+  </div>
+		<div class="image phone" style="width: 300px; height: 600px; overflow: hidden; position: relative; margin: 0 auto;">
+  <div class="inner" style="width: 100%; height: 100%;">
+    <img id="phone-slider" src="images/girl1.jpg" alt="Phone slider image"
+     style="width: 100%; height: 90%; object-fit: cover; object-position: center center;"
+ />
+  </div>
+</div>
+		
+</header>
+		<!-- One
+			<section id="one" class="wrapper style2 special">
+				<header class="major">
+					<h2>street wear for outside</h2>
+				</header>
+				<ul class="icons major">
+					<li><span class="icon solid fa-camera-retro"><span class="label">Shoot</span></span></li>
+					<li><span class="icon solid fa-sync"><span class="label">Process</span></span></li>
+					<li><span class="icon solid fa-cloud"><span class="label">Upload</span></span></li>
+				</ul>
+			</section>
+
+		<!-- Two 
+			<section id="two" class="wrapper">
+				<div class="inner alt">
+					<section class="spotlight">
+						<div class="image"><img id="image" src="images/pic01.jpg" alt="" /></div>
+						
+
+						<div class="content">
+							<h3>Tshirts</h3>
+							<p>Unique tshirt designs gallery</p>
+						</div>
+					</section>
+					<section class="spotlight">
+						<div class="image"><img id="image" src="images/pic02.jpg" alt="" /></div>
+						
+						<div class="content">
+							<h3>Hoodies and Sweatshirts</h3>
+							<p>Winterwear Gallery</p>
+						</div>
+					</section>
+					<section class="spotlight">
+						<div class="image"><img id="image" src="images/pic03.jpg" alt="" /></div>
+						<div class="content">
+							<h3>Pants and Shorts</h3>
+							<p>Finish your look and leg it</p>
+						</div>
+					</section>
+					<section class="special">
+						<ul class="icons labeled">
+							<li><span class="icon solid fa-camera-retro"><span class="label">Ipsum lorem accumsan</span></span></li>
+							<li><span class="icon solid fa-sync"><span class="label">Sed vehicula elementum</span></span></li>
+							<li><span class="icon solid fa-cloud"><span class="label">Elit fusce consequat</span></span></li>
+							<li><span class="icon solid fa-code"><span class="label">Lorem nullam tempus</span></span></li>
+							<li><span class="icon solid fa-desktop"><span class="label">Adipiscing amet sapien</span></span></li>
+						</ul>
+					</section>
+				</div>
+			</section>
+
+		<!-- Three 
+			<section id="three" class="wrapper style2 special">
+				<header class="major">
+					<h2>Magna leo sapien gravida</h2>
+					<p>Gravida at leo elementum elit fusce accumsan dui libero, quis vehicula<br />
+					lectus ultricies eu. In convallis amet leo sapien iaculis efficitur.</p>
+				</header>
+				<ul class="actions special">
+					<li><a href="#" class="button primary icon solid fa-download">Download</a></li>
+					<li><a href="#" class="button">Learn More</a></li>
+				</ul>
+			</section>
+
+		<!-- Four -->
+		<!--
+			<section id="four" class="wrapper">
+				<div class="inner">
+
+					<header class="major">
+						<h2>Elements</h2>
+					</header>
+
+					<section>
+						<h4>Text</h4>
+						<p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
+						This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
+						This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, <a href="#">this is a link</a>.</p>
+						<hr />
+						<header>
+							<h4>Heading with a Subtitle</h4>
+							<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
+						</header>
+						<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+						<header>
+							<h5>Heading with a Subtitle</h5>
+							<p>Lorem ipsum dolor sit amet nullam id egestas urna aliquam</p>
+						</header>
+						<p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing blandit tempus accumsan.</p>
+						<hr />
+						<h2>Heading Level 2</h2>
+						<h3>Heading Level 3</h3>
+						<h4>Heading Level 4</h4>
+						<h5>Heading Level 5</h5>
+						<h6>Heading Level 6</h6>
+						<hr />
+						<h5>Blockquote</h5>
+						<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>
+						<h5>Preformatted</h5>
+						<pre><code>i = 0;
+
+while (!deck.isInOrder()) {
+  print 'Iteration ' + i;
+  deck.shuffle();
+  i++;
+}
+
+print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
+					</section>
+
+					<section>
+						<h4>Lists</h4>
+						<div class="row">
+							<div class="col-6 col-12-medium">
+								<h5>Unordered</h5>
+								<ul>
+									<li>Dolor pulvinar etiam.</li>
+									<li>Sagittis adipiscing.</li>
+									<li>Felis enim feugiat.</li>
+								</ul>
+								<h5>Alternate</h5>
+								<ul class="alt">
+									<li>Dolor pulvinar etiam.</li>
+									<li>Sagittis adipiscing.</li>
+									<li>Felis enim feugiat.</li>
+								</ul>
+							</div>
+							<div class="col-6 col-12-medium">
+								<h5>Ordered</h5>
+								<ol>
+									<li>Dolor pulvinar etiam.</li>
+									<li>Etiam vel felis viverra.</li>
+									<li>Felis enim feugiat.</li>
+									<li>Dolor pulvinar etiam.</li>
+									<li>Etiam vel felis lorem.</li>
+									<li>Felis enim et feugiat.</li>
+								</ol>
+								<h5>Icons</h5>
+								<ul class="icons">
+									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands fa-github"><span class="label">Github</span></a></li>
+								</ul>
+							</div>
+						</div>
+						<h5>Actions</h5>
+						<div class="row">
+							<div class="col-6 col-12-medium">
+								<ul class="actions">
+									<li><a href="#" class="button primary">Default</a></li>
+									<li><a href="#" class="button">Default</a></li>
+								</ul>
+								<ul class="actions small">
+									<li><a href="#" class="button primary small">Small</a></li>
+									<li><a href="#" class="button small">Small</a></li>
+								</ul>
+								<ul class="actions stacked">
+									<li><a href="#" class="button primary">Default</a></li>
+									<li><a href="#" class="button">Default</a></li>
+								</ul>
+								<ul class="actions stacked">
+									<li><a href="#" class="button primary small">Small</a></li>
+									<li><a href="#" class="button small">Small</a></li>
+								</ul>
+							</div>
+							<div class="col-6 col-12-medium">
+								<ul class="actions stacked">
+									<li><a href="#" class="button primary fit">Default</a></li>
+									<li><a href="#" class="button fit">Default</a></li>
+								</ul>
+								<ul class="actions stacked">
+									<li><a href="#" class="button primary small fit">Small</a></li>
+									<li><a href="#" class="button small fit">Small</a></li>
+								</ul>
+							</div>
+						</div>
+					</section>
+
+					<section>
+						<h4>Table</h4>
+						<h5>Default</h5>
+						<div class="table-wrapper">
+							<table>
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Item One</td>
+										<td>Ante turpis integer aliquet porttitor.</td>
+										<td>29.99</td>
+									</tr>
+									<tr>
+										<td>Item Two</td>
+										<td>Vis ac commodo adipiscing arcu aliquet.</td>
+										<td>19.99</td>
+									</tr>
+									<tr>
+										<td>Item Three</td>
+										<td> Morbi faucibus arcu accumsan lorem.</td>
+										<td>29.99</td>
+									</tr>
+									<tr>
+										<td>Item Four</td>
+										<td>Vitae integer tempus condimentum.</td>
+										<td>19.99</td>
+									</tr>
+									<tr>
+										<td>Item Five</td>
+										<td>Ante turpis integer aliquet porttitor.</td>
+										<td>29.99</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="2"></td>
+										<td>100.00</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+
+						<h5>Alternate</h5>
+						<div class="table-wrapper">
+							<table class="alt">
+								<thead>
+									<tr>
+										<th>Name</th>
+										<th>Description</th>
+										<th>Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Item One</td>
+										<td>Ante turpis integer aliquet porttitor.</td>
+										<td>29.99</td>
+									</tr>
+									<tr>
+										<td>Item Two</td>
+										<td>Vis ac commodo adipiscing arcu aliquet.</td>
+										<td>19.99</td>
+									</tr>
+									<tr>
+										<td>Item Three</td>
+										<td> Morbi faucibus arcu accumsan lorem.</td>
+										<td>29.99</td>
+									</tr>
+									<tr>
+										<td>Item Four</td>
+										<td>Vitae integer tempus condimentum.</td>
+										<td>19.99</td>
+									</tr>
+									<tr>
+										<td>Item Five</td>
+										<td>Ante turpis integer aliquet porttitor.</td>
+										<td>29.99</td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="2"></td>
+										<td>100.00</td>
+									</tr>
+								</tfoot>
+							</table>
+						</div>
+					</section>
+
+					<section>
+						<h4>Buttons</h4>
+						<ul class="actions">
+							<li><a href="#" class="button primary">Primary</a></li>
+							<li><a href="#" class="button">Default</a></li>
+						</ul>
+						<ul class="actions">
+							<li><a href="#" class="button large">Large</a></li>
+							<li><a href="#" class="button">Default</a></li>
+							<li><a href="#" class="button small">Small</a></li>
+						</ul>
+						<ul class="actions fit">
+							<li><a href="#" class="button fit">Fit</a></li>
+							<li><a href="#" class="button primary fit">Fit</a></li>
+							<li><a href="#" class="button fit">Fit</a></li>
+						</ul>
+						<ul class="actions fit small">
+							<li><a href="#" class="button primary fit small">Fit + Small</a></li>
+							<li><a href="#" class="button fit small">Fit + Small</a></li>
+							<li><a href="#" class="button primary fit small">Fit + Small</a></li>
+						</ul>
+						<ul class="actions">
+							<li><a href="#" class="button primary icon solid fa-download">Icon</a></li>
+							<li><a href="#" class="button icon solid fa-download">Icon</a></li>
+						</ul>
+						<ul class="actions">
+							<li><span class="button primary disabled">Disabled</span></li>
+							<li><span class="button disabled">Disabled</span></li>
+						</ul>
+					</section>
+
+					<section>
+						<h4>Form</h4>
+						<form method="post" action="#">
+							<div class="row gtr-uniform">
+								<div class="col-6 col-12-xsmall">
+									<input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" />
+								</div>
+								<div class="col-6 col-12-xsmall">
+									<input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" />
+								</div>
+								<div class="col-12">
+									<select name="demo-category" id="demo-category">
+										<option value="">- Category -</option>
+										<option value="1">Manufacturing</option>
+										<option value="1">Shipping</option>
+										<option value="1">Administration</option>
+										<option value="1">Human Resources</option>
+									</select>
+								</div>
+								<div class="col-4 col-12-small">
+									<input type="radio" id="demo-priority-low" name="demo-priority" checked>
+									<label for="demo-priority-low">Low</label>
+								</div>
+								<div class="col-4 col-12-small">
+									<input type="radio" id="demo-priority-normal" name="demo-priority">
+									<label for="demo-priority-normal">Normal</label>
+								</div>
+								<div class="col-4 col-12-small">
+									<input type="radio" id="demo-priority-high" name="demo-priority">
+									<label for="demo-priority-high">High</label>
+								</div>
+								<div class="col-6 col-12-small">
+									<input type="checkbox" id="demo-copy" name="demo-copy">
+									<label for="demo-copy">Email me a copy</label>
+								</div>
+								<div class="col-6 col-12-small">
+									<input type="checkbox" id="demo-human" name="demo-human" checked>
+									<label for="demo-human">Not a robot</label>
+								</div>
+								<div class="col-12">
+									<textarea name="demo-message" id="demo-message" placeholder="Enter your message" rows="6"></textarea>
+								</div>
+								<div class="col-12">
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" class="primary" /></li>
+										<li><input type="reset" value="Reset" /></li>
+									</ul>
+								</div>
+							</div>
+						</form>
+					</section>
+
+					<section>
+						<h4>Image</h4>
+						<h5>Fit</h5>
+						<div class="box alt">
+							<div class="row gtr-uniform">
+								<div class="col-12"><span class="image fit"><img src="images/pic04.jpg" alt="" /></span></div>
+								<div class="col-4"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
+								<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
+								<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
+								<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
+								<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
+								<div class="col-4"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
+								<div class="col-4"><span class="image fit"><img src="images/pic03.jpg" alt="" /></span></div>
+								<div class="col-4"><span class="image fit"><img src="images/pic01.jpg" alt="" /></span></div>
+								<div class="col-4"><span class="image fit"><img src="images/pic02.jpg" alt="" /></span></div>
+							</div>
+						</div>
+						<h5>Left &amp; Right</h5>
+						<p><span class="image left"><img src="images/pic05.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+						<p><span class="image right"><img src="images/pic05.jpg" alt="" /></span>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent tincidunt felis sagittis eget. tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan eu faucibus. Integer ac pellentesque praesent.</p>
+					</section>
+
+				</div>
+			</section>
+		-->
+
+		<!-- Footer 
+			<footer id="footer">
+				<ul class="icons">
+					<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+					<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+					<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+				</ul>
+				<p class="copyright">&copy; Untitled. Credits: <a href="http://html5up.net">HTML5 UP</a></p>
+			</footer>
+
+		<!-- Scripts 
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+<script>
+  window.onload = function () {
+    const img = document.getElementById('phone-slider');
+
+    const images = [
+      'images/girl1.jpg',
+      'images/bushwalk.png',
+      
+      'images/wugirl.jpg',
+	'images/infinity22.jpg',
+    ];
+
+    let index = 0;
+
+    function rotateImage() {
+      if (img) {
+        // Fade out
+        img.classList.add('fade-out');
+
+        // Wait for fade-out to finish, then change image
+        setTimeout(() => {
+          img.src = images[index];
+          index = (index + 1) % images.length;
+
+          // Fade back in
+          img.classList.remove('fade-out');
+        }, 1000); // Match the CSS transition duration (1 second)
+      }
+    }
+
+    rotateImage(); // Show first image
+    setInterval(rotateImage, 3000); // Rotate every 3 seconds
+  };
+</script>
+
+
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<!-- Background music -->
+<audio id="bgMusic" preload="auto" loop>
+  <source src="audio/94' Ghost Shit - The Alchemist feat Westside Gunn & Conway [Instrumental] [2-Mi3skWJ0M].mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" class="musicBtn" type="button" aria-pressed="false">
+  ▶ Music
+</button>
+<audio id="bgMusic" preload="auto" loop>
+  <source src="audio/94' Ghost Shit - The Alchemist feat Westside Gunn & Conway [Instrumental] [2-Mi3skWJ0M].mp3" type="audio/mpeg">
+</audio>
+	<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+	<title> mek</title>
+<meta name="description" content="Modern retail layout starter for GitHub Pages." />
+<style>
+  :root{
+    /* Tweak these to taste */
+    --bg:#ffffff; --text:#0a0a0a; --muted:#6b7280;
+    --line:#e5e7eb; --soft:#f7f7f8;
+    --accent:#111111; /* use a single dark accent like AS Colour */
+    --maxw:1180px; --radius:14px;
+  }
+  *{box-sizing:border-box}
 	
   const audio = document.getElementById('bgMusic');
   const btn = document.getElementById('musicBtn');
@@ -823,6 +1599,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 	</body>
 </html>
+
 
 
 
