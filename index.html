@@ -54,6 +54,11 @@
   .tile .img{aspect-ratio: 4/5; background:#dcdcdc url('images/cat-1.jpg') center/cover no-repeat}
   .tile .label{position:absolute; left:12px; bottom:12px; background:#fff; padding:8px 10px; border-radius:999px; font-weight:600; font-size:14px}
 
+
+.tile .img{ transition: opacity .35s ease; }
+.tile .img.fade-out{ opacity:0; }
+
+
   /* Product grid */
   .section{padding:24px 0}
   .section h2{margin:0 0 .5rem; font-size:20px}
@@ -110,29 +115,6 @@
 
 
 	
-</style>
-		<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const audio = document.getElementById('bgMusic');
-  const btn = document.getElementById('musicBtn');
-  if (!audio || !btn) return;
-
-  btn.addEventListener('click', async () => {
-    try { await audio.play(); }
-    catch(e){ console.log('Audio play blocked:', e); }
-  });
-});
-.tile .img{
-  transition: opacity .35s ease;
-}
-.tile .img.fade-out{
-  opacity:0;
-}
-.tile .img{ transition: opacity .35s ease; }
-.tile .img.fade-out{ opacity:0; }
-
-			
-</script>
 
 
 
@@ -229,30 +211,6 @@ document.addEventListener('DOMContentLoaded', () => {
   </div>
 </section>
 
-<script>
-  function rotateTile(el){
-    const list = (el.dataset.images || '')
-      .split(',')
-      .map(s => s.trim())
-      .filter(Boolean);
-
-    if (list.length < 2) return;
-
-    const interval = parseInt(el.dataset.interval || '2500', 10);
-    let i = 0;
-
-    setInterval(() => {
-      el.classList.add('fade-out');
-      setTimeout(() => {
-        i = (i + 1) % list.length;
-        el.style.backgroundImage = `url('${list[i]}')`;
-        el.classList.remove('fade-out');
-      }, 220);
-    }, interval);
-  }
-
-  document.querySelectorAll('.tile-rotator').forEach(rotateTile);
-</script>
 
 
 	
@@ -299,10 +257,55 @@ document.addEventListener('DOMContentLoaded', () => {
     <div class="wrap copyright">© <span id="y"></span> YourBrand</div>
   </footer>
 
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // Music
+  const audio = document.getElementById('bgMusic');
+  const btn = document.getElementById('musicBtn');
+
+  if (audio && btn) {
+    btn.addEventListener('click', async () => {
+      try {
+        await audio.play();
+        btn.setAttribute('aria-pressed', 'true');
+        btn.textContent = '⏸ Music';
+      } catch (e) {
+        console.log('Audio play blocked or failed:', e);
+        alert("Audio couldn't play. Check the file path: audio/94-Ghost-Shit.mp3");
+      }
+    });
+  }
+
+  // Tile rotator
+  function rotateTile(el){
+    const list = (el.dataset.images || '')
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+
+    if (list.length < 2) return;
+
+    const interval = parseInt(el.dataset.interval || '2500', 10);
+    let i = 0;
+
+    setInterval(() => {
+      el.classList.add('fade-out');
+      setTimeout(() => {
+        i = (i + 1) % list.length;
+        el.style.backgroundImage = `url('${list[i]}')`;
+        el.classList.remove('fade-out');
+      }, 220);
+    }, interval);
+  }
+
+  document.querySelectorAll('.tile-rotator').forEach(rotateTile);
+});
+</script>
 
 
 </body>
 </html>
+
 
 
 
