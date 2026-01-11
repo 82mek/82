@@ -79,6 +79,35 @@
   .dot{width:16px; height:16px; border-radius:50%; border:1px solid #d1d5db}
   .dot.black{background:#111} .dot.grey{background:#9ca3af} .dot.navy{background:#1f2937} .dot.white{background:#fff}
 
+
+<script>
+  function rotateTile(el){
+    const list = (el.dataset.images || '')
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+
+    if (list.length < 2) return;
+
+    const interval = parseInt(el.dataset.interval || '2500', 10);
+    let i = 0;
+
+    setInterval(() => {
+      el.classList.add('fade-out');
+      setTimeout(() => {
+        i = (i + 1) % list.length;
+        el.style.backgroundImage = `url('${list[i]}')`;
+        el.classList.remove('fade-out');
+      }, 220);
+    }, interval);
+  }
+
+  document.querySelectorAll('.tile-rotator').forEach(rotateTile);
+</script>
+
+
+	
+
   /* USP / Promo band */
   .usp{margin:32px 0; background:var(--soft); border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
   .usp .wrap{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; padding:18px 20px}
@@ -142,30 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 </script>
 
-<script>
-  function rotateTile(el){
-    const list = (el.dataset.images || '')
-      .split(',')
-      .map(s => s.trim())
-      .filter(Boolean);
 
-    if (list.length < 2) return;
-
-    const interval = parseInt(el.dataset.interval || '2500', 10);
-    let i = 0;
-
-    setInterval(() => {
-      el.classList.add('fade-out');
-      setTimeout(() => {
-        i = (i + 1) % list.length;
-        el.style.backgroundImage = `url('${list[i]}')`;
-        el.classList.remove('fade-out');
-      }, 220);
-    }, interval);
-  }
-
-  document.querySelectorAll('.tile-rotator').forEach(rotateTile);
-</script>
 
 
 
@@ -787,6 +793,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 	</body>
 </html>
+
 
 
 
