@@ -114,28 +114,7 @@
     .foot{grid-template-columns:1fr}
   }
 
-  function rotateTile(el){
-    const list = (el.dataset.images || '')
-      .split(',')
-      .map(s => s.trim())
-      .filter(Boolean);
-
-    if (list.length < 2) return;
-
-    const interval = parseInt(el.dataset.interval || '2500', 10);
-    let i = 0;
-
-    setInterval(() => {
-      el.classList.add('fade-out');
-      setTimeout(() => {
-        i = (i + 1) % list.length;
-        el.style.backgroundImage = `url('${list[i]}')`;
-        el.classList.remove('fade-out');
-      }, 220);
-    }, interval);
-  }
-
-  document.querySelectorAll('.tile-rotator').forEach(rotateTile);
+  
 
 
 
@@ -163,6 +142,38 @@ document.addEventListener('DOMContentLoaded', () => {
 			
 </script>
 
+<script>
+  function rotateTile(el){
+    const list = (el.dataset.images || '')
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+
+    if (list.length < 2) return;
+
+    const interval = parseInt(el.dataset.interval || '2500', 10);
+    let i = 0;
+
+    setInterval(() => {
+      el.classList.add('fade-out');
+      setTimeout(() => {
+        i = (i + 1) % list.length;
+        el.style.backgroundImage = `url('${list[i]}')`;
+        el.classList.remove('fade-out');
+      }, 220);
+    }, interval);
+  }
+
+  document.querySelectorAll('.tile-rotator').forEach(rotateTile);
+</script>
+
+
+
+
+
+
+
+		
 </head>
 <body>
 
@@ -776,6 +787,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 	</body>
 </html>
+
 
 
 
