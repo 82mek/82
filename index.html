@@ -284,7 +284,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+	
   // Tile rotator
+	/*
   function rotateTile(el){
     const list = (el.dataset.images || '')
       .split(',')
@@ -307,12 +309,65 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.querySelectorAll('.tile-rotator').forEach(rotateTile);
+});	
+*/
+document.addEventListener('DOMContentLoaded', () => {
+  // ---- Round-robin tile rotator (one tile changes per tick) ----
+
+  const tiles = Array.from(document.querySelectorAll('.tile-rotator')).map(el => {
+    const list = (el.dataset.images || '')
+      .split(',')
+      .map(s => s.trim())
+      .filter(Boolean);
+
+    return {
+      el,
+      list,
+      i: 0,
+      interval: parseInt(el.dataset.interval || '2500', 10), // per-tile speed if you want
+      last: 0
+    };
+  }).filter(t => t.list.length >= 2);
+
+  if (!tiles.length) return;
+
+  // Ensure each tile starts on its first image
+  tiles.forEach(t => {
+    t.i = 0;
+    t.el.style.backgroundImage = `url('${t.list[0]}')`;
+  });
+
+  // Global cadence: how often we advance to the NEXT tile
+  // Example: 1200ms means: tshirts changes, 1.2s later hoodies, etc.
+  const GLOBAL_TICK_MS = 1200;
+
+  let tileIndex = 0;
+
+  function swapOneTile(t){
+    // fade out using your existing CSS (.fade-out)
+    t.el.classList.add('fade-out');
+
+    setTimeout(() => {
+      t.i = (t.i + 1) % t.list.length;
+      t.el.style.backgroundImage = `url('${t.list[t.i]}')`;
+      t.el.classList.remove('fade-out');
+    }, 220);
+  }
+
+  setInterval(() => {
+    const t = tiles[tileIndex];
+    swapOneTile(t);
+    tileIndex = (tileIndex + 1) % tiles.length;
+  }, GLOBAL_TICK_MS);
 });
+
+
 </script>
 
 
 </body>
 </html>
+
 
 
 
