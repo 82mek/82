@@ -168,7 +168,17 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="media"></div>
+    <div class="media">
+  <div class="hero-anim" id="heroAnim">
+    <!-- Paste different SVG animations in here over time -->
+    <!-- Example: your logo draw SVG -->
+    <svg class="heroAnim" viewBox="0 0 1200 520" preserveAspectRatio="none" aria-hidden="true">
+      <rect width="1200" height="520" fill="#111"/>
+      <path class="draw" d="M80 320 C 260 120, 520 120, 720 320 S 1100 520, 1160 260"
+            fill="none" stroke="rgba(255,255,255,.9)" stroke-width="6" stroke-linecap="round"/>
+    </svg>
+  </div>
+</div>
     <div class="copy">
       <h1>mek.</h1>
       <p>unique designs with the environment in mind</p>
@@ -371,6 +381,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 </body>
 </html>
+
 
 
 
